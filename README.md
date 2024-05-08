@@ -49,7 +49,123 @@
   - [Refer this example](./SOLID%20Principles%20examples/open-closed_principle.py)
 - **L**iskov Substitution principle - `As long as the sub class is substituable by the derived class (base class)`, it satisfies the principle.
   - [Refer this example](./SOLID%20Principles%20examples/liskov_substitution_principle.py)
-- **I**nterface segregation principle - `A derving class from an interface should have only required methods. Any unwanted methods leads to a bulk or fatty interface which violates the principle`. For example, a logger interface has a method called _log_, then if DBLogger and FileLogger are derived from the interface which has to declare different methods that the other interface doesn't need violates the principle. To solve it, we can create sub interfaces that derives from the actual one with its custom methods, this approach segregates the interfaces with holding relevant methods.
+- **I**nterface segregation principle - `A derving class from an interface should have only required methods. Any unwanted methods leads to a bulk or fatty interface which violates the principle`. For example, a logger interface has a method called _log_, then if DBLogger and FileLogger are derived from the interface which has to declare different methods that the other derived class doesn't need, violates the principle. To solve it, we can create sub interfaces that derives from the actual one with its custom methods, this approach segregates the interfaces with holding relevant methods.
   - [Refer this example](./SOLID%20Principles%20examples/interface_segregation_principle.py)
-- **D**ependeny Inversion principle - `Depend upon abstractions, not concretions`. For example, a manager can supervise different types of employees like developers, testers etc., that doesn't mean that we have to let the Manager class let know the type employee being supervised before hand. Instead we can create a generic Employee class that can be used to create additional employee types and just add to the supervising list whenever needed thus removing the predefined code. [Refer this site](https://www.geeksforgeeks.org/dependecy-inversion-principle-solid/)
+- **D**ependeny Inversion principle - `Depend upon abstractions, not concretions`. For example, a manager can supervise different types of employees like developers, testers etc., that doesn't mean that we have to let the Manager class let know the employee type being supervised before hand. Instead we can create a generic Employee class that can be used to create additional employee types and just add to the supervising list whenever needed thus removing the predefined code. [Refer this site](https://www.geeksforgeeks.org/dependecy-inversion-principle-solid/)
   - [Refer this example](./SOLID%20Principles%20examples/dependency_inversion_principle.py)
+
+## Singleton Pattern
+
+- `At any given point of time, a class should have only one instance of it`. When instance of this class types are created it should produce the same common instance. This pattern can be in loggers, DB connections, caching, thread pools etc...
+
+  - The principles of this pattern are:
+    1. Ensure the class has only one single instance
+    2. Provide global access to this instance
+    3. Control how it is instantiated
+    4. Any critical part of its code is being entered serially (when threading is used)
+
+- Design considerations:
+
+  1. `lazy construction` which means that create class instance only when its first needed. Or consider `eager loading` which means that singleton instance to be always ready and loaded fast.
+  2. `thread safety` - to properlly control the access and lock it accordingly.
+
+- Implementation:
+
+  1. Gang of Four Implementation (classic way):
+
+  ```python
+  class ClassicSingleton:
+    _instance = None
+
+    def __init__(self):
+      # Restricting user from creating new class instances
+      raise RuntimeError("Call get_instance() for ClassicSingleton instance")
+
+    @classmethod
+    def get_instance(cls):
+      if not _instance: # lazy instanstiation
+        cls._instance = cls.__new__(cls) # Creating an instance
+
+      return cls._instance
+
+  singleton_instance = ClassicSingleton.get_instance() # getting a singleton instance
+  ```
+
+  2. Simple python way of implementation:
+
+  ```python
+  class Singleton:
+    _instance = None
+
+    def __new__(cls): # Overriding the builtin __new__ method (which creates instances of a class) to return only a single global instance of the class
+      if not cls._instance: # lazy instanstiation
+        cls._instance = super().__new__(cls)
+
+      return cls._instance
+
+  singleton_instance = Singleton()
+  ```
+
+  3. Using metaclass (**_recommended_**):
+
+  - `metaclass` - In Python metaclass is a class that defines the behaviour and rules for creating other classes. These are `classes of classes`. By default, all python classes implicitly inherit from the `type` builtin class which is a metaclass itself. It allows to `customize the class creation process`.
+
+  ```python
+  # Lazy instantiation
+  class SingletonMeta(type):
+    _instances = {} # Store and tracks all the instances.
+
+    def __call__(cls, *args, **kwargs):
+      if cls not in _instances: # create an instance only if the dictionary doesn't have an instance existing with the class
+        instance = super().__call__(*args, **kwargs)
+        cls._instance[cls] = instance
+
+      return cls._instances[cls]
+
+  class Singleton(metaclass=SingletonMeta):
+    def some_business_logic():
+      pass
+
+  singleton_instance = Singleton() # When instantied, as Singleton inherits the metaclass, the __call__ method of the metaclass will be invoked.
+  ```
+
+  ```python
+  # Eager loading
+  class SingletonMeta(type):
+    _instances = {}
+
+    def __init__(cls, name, bases, dct):
+      super().__init__(name, bases, dct)
+      cls._instaces[cls] = super().__call__()
+
+    def __call__(cls, *args, **kwargs):
+      return cls._instances[cls]
+
+  class Singleton(metaclass=SingletonMeta):
+    def __init__(self):
+      # Initialize attributes here
+      pass
+
+  singleton_instance = Singleton() # Even before everything loaded, metclasses load first and an instance will be created.
+  ```
+
+4. Thread safe implementation
+
+- When using threads, there a possibility of mutiple threads trying to execute the same function (called race condition) which can lead to unpredicted output. To avoid that scenario we use Lock mechanism where the thread executing the function acquires the lock and releases only when its work is done and made available to the next thread. Once the lock is acquired, rest of the threads will be in the waiting queue.
+
+```python
+import threading
+
+class ThreadSafeSingleton:
+  _instance = None
+  _lock = threading.Lock()
+
+  def __new__(cls):
+    with cls._lock: # acquires the lock before creating instance
+      if not _instance:
+        cls._instance = super().__new__(cls)
+
+      return cls._instance # Releases the lock as the with block end here
+
+singleton_instance = ThreadSafeSingleton()
+```
