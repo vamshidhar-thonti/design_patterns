@@ -18,3 +18,8 @@
 2024-05-08 16:04:41,786 - app_logger - WARNING - This is a WARNING message
 2024-05-08 16:04:41,786 - app_logger - ERROR - This is a ERROR message
 2024-05-08 16:04:41,786 - app_logger - CRITICAL - This is a CRITICAL message
+2024-05-09 17:41:38,510 - app_logger - DEBUG - This is a DEBUG message
+2024-05-09 17:41:38,510 - app_logger - INFO - This is a INFO message
+2024-05-09 17:41:38,510 - app_logger - WARNING - This is a WARNING message
+2024-05-09 17:41:38,510 - app_logger - ERROR - This is a ERROR message
+2024-05-09 17:41:38,510 - app_logger - CRITICAL - This is a CRITICAL message

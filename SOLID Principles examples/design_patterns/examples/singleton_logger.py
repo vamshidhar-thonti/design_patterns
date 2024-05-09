@@ -3,7 +3,7 @@ import threading
 import logging
 import sys
 
-class SingletonMeta(metaclass=ABCMeta):
+class SingletonMeta(ABCMeta):
     _instances = {}
     _lock = threading.Lock()
 
@@ -13,7 +13,7 @@ class SingletonMeta(metaclass=ABCMeta):
                 cls._instances[cls] = super().__call__(*args, **kwargs)
             return cls._instances[cls]
         
-class BaseLogger(SingletonMeta):
+class BaseLogger(metaclass=SingletonMeta):
     @abstractmethod
     def debug(cls, message: str):
         pass
