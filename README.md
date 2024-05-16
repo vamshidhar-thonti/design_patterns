@@ -169,3 +169,16 @@ class ThreadSafeSingleton:
 
 singleton_instance = ThreadSafeSingleton()
 ```
+
+## Factory Method Design Pattern
+
+- `Instead of a creating an instance directly with the constructor, a factory is created which returns the required instance`
+- It is implemented with the interface which has the sub classes implementing it. The factory when called with `create_instance()` returns the desired class's instance.
+- It the factory can also cached for better efficiency.
+- It follows the `Single Responsibility Principle`, `Open/Closed Principle`, and makes the code `loosely coupled`.
+- The 2 types of implementation are
+
+  1. Gang of Four Factory method implementation
+  2. Parameterized (Simple) Factory method implementation (recommended)
+
+- Find the implmentation example of this design pattern [here](./SOLID%20Principles%20examples/design_patterns/factory_method/factory_method.py)
