@@ -182,3 +182,10 @@ singleton_instance = ThreadSafeSingleton()
   2. Parameterized (Simple) Factory method implementation (recommended)
 
 - Find the implmentation example of this design pattern [here](./SOLID%20Principles%20examples/design_patterns/factory_method/factory_method.py)
+
+## Builder Design Pattern
+
+- Its a creational design pattern, where the reusable objects can be used to build complex objects.
+  - For example, to build a house class, we need hall, kitchen, bathroom etc... So, we create these individual classes and build a complex object House. With the same reusable classes, different representations of houses can be made.
+
+- Find the implmentation example of this design pattern [here](./SOLID%20Principles%20examples/design_patterns/builder_design/sandwich_builder.py)
