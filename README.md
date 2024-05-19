@@ -186,6 +186,14 @@ singleton_instance = ThreadSafeSingleton()
 ## Builder Design Pattern
 
 - Its a creational design pattern, where the reusable objects can be used to build complex objects.
+
   - For example, to build a house class, we need hall, kitchen, bathroom etc... So, we create these individual classes and build a complex object House. With the same reusable classes, different representations of houses can be made.
 
 - Find the implmentation example of this design pattern [here](./SOLID%20Principles%20examples/design_patterns/builder_design/sandwich_builder.py)
+
+## Adapter Design Pattern
+
+- To solve the problem of incompatibility between the classes in a flow, this pattern can be used. It is a structural type of design pattern.
+  - For example, a data sources gives us the data in XML format but the output we need is in JSON format, the adapter design can be leveraged to convert the XML format to JSON format in the flow.
+
+- Find the implmentation example of this design pattern [here](./SOLID%20Principles%20examples/design_patterns/adapter_design/adapter_pattern.py)
