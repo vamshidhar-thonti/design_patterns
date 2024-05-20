@@ -194,6 +194,14 @@ singleton_instance = ThreadSafeSingleton()
 ## Adapter Design Pattern
 
 - To solve the problem of incompatibility between the classes in a flow, this pattern can be used. It is a structural type of design pattern.
+
   - For example, a data sources gives us the data in XML format but the output we need is in JSON format, the adapter design can be leveraged to convert the XML format to JSON format in the flow.
 
 - Find the implmentation example of this design pattern [here](./SOLID%20Principles%20examples/design_patterns/adapter_design/adapter_pattern.py)
+
+## Stratergy Design Pattern
+
+- This pattern can be used in the scenarios where the alogrithm has to change based on the inputs provided. Instead of writing all the algorithms (logics) in a long if-else block in a single class, this patterns proposes to create a new class for each of the algorithm and then accordingly call it when needed.
+  - For example, a webscraper is being designed to get different format of data like csv, SQL, json, tables etc. Instead writing all those individual algorithms in a single class, create a new class for each data format and call only the specific one in the webscraper flow.
+
+- Find the implmentation example of this design pattern [here](./SOLID%20Principles%20examples/design_patterns/strategy_pattern/strategy_pattern.py)
