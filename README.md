@@ -205,3 +205,8 @@ singleton_instance = ThreadSafeSingleton()
   - For example, a webscraper is being designed to get different format of data like csv, SQL, json, tables etc. Instead writing all those individual algorithms in a single class, create a new class for each data format and call only the specific one in the webscraper flow.
 
 - Find the implmentation example of this design pattern [here](./SOLID%20Principles%20examples/design_patterns/strategy_pattern/strategy_pattern.py)
+
+## Observer Design Pattern
+- This pattern helps in creating a relation between 2 classes (1. Publishers: holds the state/data and notifies its registered Observers and 2. Subscribers: which gets notified when the state gets modified). So, in short defines one to many dependency between objects so that when one object changes the state, all its dependents are notified and updated automatically.
+
+- Find the implmentation example of this design pattern [here](./SOLID%20Principles%20examples/design_patterns/observer_design/observer_pattern.py)
