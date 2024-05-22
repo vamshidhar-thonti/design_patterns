@@ -214,4 +214,5 @@ singleton_instance = ThreadSafeSingleton()
 ## State Design Pattern
 - This pattern allows an object to alter its behaviour when its internal state changes. This object appears to change its class. In simple terms, based on the state of a class the respective action is performed.
   - For example, if the light switch and its state (ON, OFF) is considered, based on the changes to the state, the action of switching the light ON/OFF is performed.
-  
+
+- Find the implmentation example of this design pattern [here](./SOLID%20Principles%20examples/design_patterns/state_design_pattern/traffic_lights.py)
