@@ -216,3 +216,6 @@ singleton_instance = ThreadSafeSingleton()
   - For example, if the light switch and its state (ON, OFF) is considered, based on the changes to the state, the action of switching the light ON/OFF is performed.
 
 - Find the implmentation example of this design pattern [here](./SOLID%20Principles%20examples/design_patterns/state_design_pattern/traffic_lights.py)
+
+### Implemented the [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life).
+  - Refer the code [here](./course_assignment/game_of_life/main.py)

@@ -1,2 +1,5 @@
 .venv
 SOLID Principles examples/design_patterns/.DS_Store
+__pycache__
+course_assignment/.DS_Store
+course_assignment/game_of_life/.DS_Store
